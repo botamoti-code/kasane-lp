@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KASANE - SNS運用代行・スクール事業化 伴走型コンサルティング</title>
+  <style>
+    /* UTAGE環境向けのスコープ限定スタイル */
+    .kasane-lp-v2 {
+      display: block;
+      font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+      color: #333333 !important;
+      line-height: 1.8 !important;
+      background-color: #fcfcfc !important;
+      font-size: 19px !important; /* 40-50代男性向けにベース文字を大きく */
+      -webkit-text-size-adjust: 100%;
+      width: 100%;
+    }
+    .kasane-lp-v2 * {
+      box-sizing: border-box !important;
+      margin: 0;
+      padding: 0;
+      border: none;
+      text-decoration: none;
+    }
+    .kasane-container {
+      max-width: 1080px !important;
+      margin: 0 auto !important;
+      padding: 0 20px !important;
+      width: 100%;
+    }
+    
+    /* セクション共通 */
+    .kasane-section {
+      padding: 100px 0 !important;
+      background-color: transparent !important;
+    }
+    .kasane-section-title {
+      font-size: 38px !important;
+      font-weight: 700 !important;
+      text-align: center !important;
+      color: #0a192f !important;
+      margin-bottom: 60px !important;
+      position: relative !important;
+      padding-bottom: 20px !important;
+      font-family: "Times New Roman", "Yu Mincho", "MS Mincho", serif;
+    }
+    .kasane-section-title::after {
+      content: '' !important;
+      position: absolute !important;
+      bottom: 0 !important;
+      left: 50% !important;
+      transform: translateX(-50%) !important;
+      width: 80px !important;
+      height: 4px !important;
+      background-color: #d4af37 !important;
+    }
+  
+    /* ボタン */
+    .kasane-btn {
+      display: inline-block !important;
+      background: linear-gradient(135deg, #d4af37 0%, #aa7c11 100%) !important;
+      color: #ffffff !important;
+      padding: 24px 50px !important;
+      font-size: 26px !important;
+      font-weight: 700 !important;
+      border-radius: 4px !important;
+      transition: all 0.3s ease !important;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2) !important;
+      text-align: center !important;
+      cursor: pointer !important;
+    }
+    .kasane-btn:hover {
+      transform: translateY(-3px) !important;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.3) !important;
+      opacity: 0.9 !important;
+    }
+  
+    /* アニメーション定義 */
+    .anim-ready {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 1.2s ease-out;
+    }
+    .anim-active {
+      opacity: 1 !important;
+      transform: translateY(0) !important;
+    }
+    
+    @keyframes titleFade {
+      from { opacity: 0; transform: translateY(20px); filter: blur(5px); }
+      to { opacity: 1; transform: translateY(0); filter: blur(0); }
+    }
+    .animate-hero-title {
+      animation: titleFade 1.8s ease-out forwards;
+    }
+  
+    /* ヒーローエリア（背景画像スライドアニメーション） */
+    .kasane-hero {
+      position: relative !important;
+      overflow: hidden !important;
+      padding: 160px 0 !important;
+      text-align: center !important;
+      background-color: #0a192f !important;
+      width: 100%;
+    }
+    .kasane-hero-bg {
+      position: absolute !important;
+      top: 0 !important;
+      left: 0 !important;
+      width: 100% !important;
+      height: 100% !important;
+      background-size: cover !important;
+      background-position: center !important;
+      background-repeat: no-repeat !important;
+      opacity: 0;
+      animation: heroSlider 15s infinite ease-in-out;
+      z-index: 1 !important;
+    }
+    .kasane-hero-overlay {
+      position: absolute !important;
+      top: 0 !important;
+      left: 0 !important;
+      width: 100% !important;
+      height: 100% !important;
+      background-color: rgba(10, 25, 47, 0.75) !important;
+      z-index: 2 !important;
+    }
+    .kasane-hero .kasane-container {
+      position: relative !important;
+      z-index: 3 !important;
+    }
+    .kasane-hero-bg1 {
+      background-image: url('https://utagesystem.s3.ap-northeast-1.amazonaws.com/BcZFczv5CgN8/u4OitimXyrTDgqreZtqZHcTvwRIfAS2vyojd2jFX.png') !important;
+      animation-delay: 0s !important;
+    }
+    .kasane-hero-bg2 {
+      background-image: url('https://utagesystem.s3.ap-northeast-1.amazonaws.com/BcZFczv5CgN8/r5Y3D90XMviYu0voVYiMtNZaUjzWXCzYqL9DwBAp.png') !important;
+      animation-delay: 5s !important;
+    }
+    .kasane-hero-bg3 {
+      background-image: url('https://utagesystem.s3.ap-northeast-1.amazonaws.com/BcZFczv5CgN8/ipObvhPtVZk2sOSRV9oGRA5mdbQ3HmbmYYpoicVm.png') !important;
+      animation-delay: 10s !important;
+    }
+    @keyframes heroSlider {
+      0% { opacity: 0; transform: scale(1); }
+      8% { opacity: 1; }
+      33.33% { opacity: 1; }
+      41.33% { opacity: 0; transform: scale(1.05); }
+      100% { opacity: 0; }
+    }
+  
+    .kasane-hero-sub {
+      font-size: 24px !important;
+      letter-spacing: 0.1em !important;
+      color: #d4af37 !important;
+      margin-bottom: 25px !important;
+      font-weight: bold !important;
+    }
+    .kasane-hero-title {
+      font-size: 52px !important;
+      font-weight: 700 !important;
+      line-height: 1.4 !important;
+      margin-bottom: 40px !important;
+      color: #ffffff !important;
+      font-family: "Times New Roman", "Yu Mincho", "MS Mincho", serif;
+    }
+    .kasane-hero-emphasis {
+      font-size: 72px !important;
+      color: #d4af37 !important;
+      display: block !important;
+      margin-bottom: 15px !important;
+      border-bottom: 3px solid #d4af37;
+      width: fit-content;
+      margin-left: auto;
+      margin-right: auto;
+      padding-bottom: 5px;
+    }
+  
+    /* 強みセクション */
+    .kasane-strength {
+      background-color: #ffffff !important;
+      border-bottom: 1px solid #eee !important;
+    }
+    .kasane-strength-box {
+      background: #f8f1e0 !important;
+      padding: 50px !important;
+      border-radius: 8px !important;
+    }
+    .kasane-strength-header {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+    .kasane-strength-icon {
+      font-size: 60px;
+      color: #0a192f;
+    }
+    .kasane-strength-content h3 {
+      font-size: 32px !important;
+      color: #0a192f !important;
+      margin-bottom: 15px !important;
+      font-weight: 700 !important;
+    }
+    .kasane-strength-sub-title {
+      font-size: 24px !important;
+      color: #aa7c11 !important;
+      margin-bottom: 15px !important;
+      font-weight: 700 !important;
+    }
+    .kasane-strength-content p {
+      font-size: 20px !important;
+      line-height: 1.7 !important;
+      margin-bottom: 20px !important;
+    }
+    .kasane-strength-images {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px;
+      margin-top: 40px;
+    }
+    .kasane-strength-img-wrapper {
+      width: 100%;
+      background: #ffffff !important;
+      padding: 20px !important;
+      border-radius: 8px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .kasane-strength-img-wrapper img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+  
+    /* お悩みセクション */
+    .kasane-pain {
+      background-color: #f4f6f9 !important;
+    }
+    .kasane-pain-layout {
+      display: grid !important;
+      grid-template-columns: 1.2fr 1fr !important;
+      gap: 40px !important;
+      align-items: center !important;
+    }
+    .kasane-pain-grid {
+      display: grid !important;
+      grid-template-columns: 1fr !important;
+      gap: 20px !important;
+    }
+    .kasane-pain-card {
+      background: #ffffff !important;
+      padding: 30px 25px !important;
+      border-radius: 4px !important;
+      border-left: 6px solid #d4af37 !important;
+      display: flex !important;
+      align-items: center !important;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.03) !important;
+    }
+    .kasane-pain-icon { font-size: 32px !important; margin-right: 20px !important; color: #d9534f !important; }
+    .kasane-pain-text { font-size: 21px !important; font-weight: 700 !important; color: #1a1a1a !important; }
+    
+    .kasane-pain-img-box {
+      background: #ffffff !important;
+      padding: 15px !important;
+      border-radius: 8px !important;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.08) !important;
+    }
+  
+    /* 提案・方針セクション */
+    .kasane-proposal {
+      background-color: #ffffff !important;
+    }
+    .kasane-proposal-box {
+      background-color: #f4f6f9 !important;
+      border-top: 4px solid #0a192f !important;
+      padding: 50px 40px !important;
+      border-radius: 0 0 8px 8px !important;
+      max-width: 900px !important;
+      margin: 0 auto !important;
+    }
+    .kasane-proposal-lead {
+      font-size: 26px !important;
+      color: #0a192f !important;
+      font-weight: bold !important;
+      margin-bottom: 30px !important;
+      text-align: center !important;
+      line-height: 1.5 !important;
+    }
+    .kasane-proposal-text {
+      font-size: 20px !important;
+      line-height: 1.8 !important;
+    }
+    .kasane-proposal-text p {
+      margin-bottom: 20px !important;
+    }
+  
+    /* サービス内容 */
+    .kasane-service { background-color: #f4f6f9 !important; }
+    .kasane-service-grid {
+      display: grid !important;
+      grid-template-columns: repeat(3, 1fr) !important;
+      gap: 30px !important;
+      margin-bottom: 40px !important;
+    }
+    .kasane-service-card {
+      background: #ffffff !important;
+      padding: 40px 25px !important;
+      border-radius: 4px !important;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05) !important;
+      border-top: 5px solid #0a192f !important;
+    }
+    .kasane-service-card:hover {
+      border-top-color: #d4af37 !important;
+    }
+    .kasane-service-name {
+      font-size: 24px !important;
+      font-weight: 700 !important;
+      color: #0a192f !important;
+      margin-bottom: 25px !important;
+      text-align: center !important;
+      border-bottom: 1px solid #e1e8ed !important;
+      padding-bottom: 15px !important;
+    }
+    .kasane-service-list {
+      list-style: none !important;
+      padding: 0 !important;
+      margin: 0 !important;
+    }
+    .kasane-service-list li {
+      font-size: 18px !important;
+      margin-bottom: 15px !important;
+      position: relative !important;
+      padding-left: 25px !important;
+      line-height: 1.5 !important;
+      color: #333 !important;
+    }
+    .kasane-service-list li::before {
+      content: "■" !important;
+      position: absolute !important;
+      left: 0 !important;
+      top: 1px !important;
+      color: #d4af37 !important;
+      font-size: 14px !important;
+    }
+  
+    /* その他・広告・導線タグエリア */
+    .kasane-service-other {
+      background: linear-gradient(135deg, #0a192f 0%, #112240 100%) !important;
+      color: #ffffff !important;
+      padding: 40px !important;
+      border-radius: 6px !important;
+      margin-bottom: 40px !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+      flex-wrap: wrap !important;
+      gap: 20px !important;
+    }
+    .kasane-service-other-title {
+      font-size: 24px !important;
+      font-weight: 700 !important;
+      color: #d4af37 !important;
+    }
+    .kasane-service-other-tags {
+      display: flex !important;
+      gap: 15px !important;
+      flex-wrap: wrap !important;
+    }
+    .kasane-service-tag {
+      background: rgba(255, 255, 255, 0.08) !important;
+      border: 1px solid #d4af37 !important;
+      padding: 10px 22px !important;
+      border-radius: 4px !important;
+      font-size: 18px !important;
+      font-weight: bold !important;
+    }
+  
+    /* 凍結対策・著作権ブロック */
+    .kasane-security-box {
+      background-color: #fffcf0 !important;
+      border: 1px solid #e6cb7b !important;
+      border-left: 6px solid #d4af37 !important;
+      padding: 35px !important;
+      border-radius: 4px !important;
+      margin-bottom: 50px !important;
+    }
+    .kasane-security-title {
+      font-size: 22px !important;
+      font-weight: bold !important;
+      color: #0a192f !important;
+      margin-bottom: 15px !important;
+      display: flex !important;
+      align-items: center !important;
+      gap: 10px !important;
+    }
+    .kasane-security-text {
+      font-size: 18px !important;
+      line-height: 1.7 !important;
+      color: #444444 !important;
+    }
+  
+    /* 対面ミーティング可能地域 */
+    .kasane-area {
+      background-color: #ffffff !important;
+    }
+    .kasane-area-card {
+      max-width: 850px !important;
+      margin: 0 auto !important;
+      background: #f4f6f9 !important;
+      padding: 40px !important;
+      border-radius: 6px !important;
+    }
+    .kasane-area-list {
+      display: grid !important;
+      grid-template-columns: repeat(2, 1fr) !important;
+      gap: 20px !important;
+      list-style: none !important;
+    }
+    .kasane-area-item {
+      font-size: 20px !important;
+      font-weight: bold !important;
+      padding: 15px 20px !important;
+      background: #ffffff !important;
+      border-radius: 4px !important;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.02) !important;
+    }
+    .kasane-area-item.highlight-city {
+      border-left: 5px solid #d4af37 !important;
+      background: #fbf8f0 !important;
+    }
+    .kasane-area-note {
+      margin-top: 30px !important;
+      text-align: center !important;
+      font-size: 17px !important;
+      color: #666663 !important;
+      line-height: 1.6 !important;
+    }
+  
+    /* お見積りシミュレーション（UTAGEデザイン統合） */
+    .sim-container {
+      max-width: 800px !important;
+      margin: 60px auto 0 auto !important;
+      padding: 40px !important;
+      border: 1px solid #e1e8ed !important;
+      border-radius: 6px !important;
+      background-color: #ffffff !important;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05) !important;
+      text-align: left !important;
+    }
+    .sim-title {
+      font-size: 28px !important;
+      font-weight: 700 !important;
+      text-align: center !important;
+      color: #0a192f !important;
+      margin-bottom: 35px !important;
+      padding-bottom: 15px !important;
+      border-bottom: 2px solid #d4af37 !important;
+    }
+    .sim-section {
+      margin-bottom: 35px !important;
+    }
+    .sim-section-title {
+      font-size: 19px !important;
+      font-weight: 700 !important;
+      color: #0a192f !important;
+      background-color: #f4f6f9 !important;
+      padding: 12px 15px !important;
+      margin-bottom: 15px !important;
+      border-left: 4px solid #d4af37 !important;
+    }
+    .sim-item {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+      margin-bottom: 12px !important;
+      padding-bottom: 10px !important;
+      border-bottom: 1px dashed #e1e8ed !important;
+    }
+    .sim-item label {
+      display: flex !important;
+      align-items: center !important;
+      cursor: pointer !important;
+      flex: 1 !important;
+      font-size: 18px !important;
+      color: #333333 !important;
+      font-weight: normal !important;
+    }
+    .sim-item input[type="checkbox"] {
+      margin-right: 12px !important;
+      width: 20px !important;
+      height: 20px !important;
+      cursor: pointer !important;
+      position: relative !important;
+      top: 0 !important;
+    }
+    .sim-item-input-group {
+      display: flex !important;
+      align-items: center !important;
+      font-size: 18px !important;
+      color: #333333 !important;
+    }
+    .sim-item input[type="number"] {
+      width: 80px !important;
+      padding: 6px !important;
+      margin: 0 8px !important;
+      text-align: right !important;
+      border: 1px solid #ccd6f6 !important;
+      border-radius: 4px !important;
+      font-size: 17px !important;
+      color: #333333 !important;
+      background-color: #ffffff !important;
+    }
+    .sim-price {
+      font-weight: 700 !important;
+      color: #444444 !important;
+      margin-left: 15px !important;
+      font-size: 18px !important;
+    }
+    .sim-total-box {
+      background: linear-gradient(135deg, #f8f1e0 0%, #f4ebd4 100%) !important;
+      border: 1px solid #e1d3b7 !important;
+      padding: 25px !important;
+      border-radius: 6px !important;
+      text-align: center !important;
+      margin-top: 35px !important;
+    }
+    .sim-total-title {
+      font-size: 18px !important;
+      font-weight: 700 !important;
+      color: #0a192f !important;
+      margin-bottom: 10px !important;
+    }
+    .sim-total-price {
+      font-size: 42px !important;
+      font-weight: 700 !important;
+      color: #aa7c11 !important;
+    }
+    .sim-note {
+      margin-top: 25px !important;
+      font-size: 16px !important;
+      color: #666666 !important;
+      text-align: center !important;
+      line-height: 1.6 !important;
+    }
+  
+    /* 内製化研修セクション */
+    .kasane-training {
+      margin-top: 50px !important;
+      background: linear-gradient(to right, #0a192f, #1a2a44) !important;
+      color: #ffffff !important;
+      padding: 50px !important;
+      border-radius: 8px !important;
+      display: flex !important;
+      align-items: center !important;
+      gap: 40px !important;
+    }
+    .kasane-training-text h4 {
+      font-size: 26px !important;
+      color: #d4af37 !important;
+      margin-bottom: 15px !important;
+    }
+  
+    /* 実績セクション */
+    .kasane-stats {
+      background-color: #ffffff !important;
+    }
+    .kasane-stats-grid {
+      display: grid !important;
+      grid-template-columns: repeat(3, 1fr) !important;
+      gap: 24px !important;
+      margin-bottom: 50px !important;
+    }
+    .kasane-stats-card {
+      background: #0a192f !important;
+      color: #ffffff !important;
+      padding: 40px 20px !important;
+      text-align: center !important;
+      border-radius: 4px !important;
+    }
+    .kasane-stats-num { font-size: 46px !important; font-weight: 700 !important; color: #ffffff !important; margin: 10px 0 !important;}
+    .kasane-stats-link { 
+      color: #d4af37 !important; 
+      text-decoration: underline !important; 
+      font-size: 17px !important; 
+      font-weight: bold !important;
+    }
+  
+    .kasane-result-grid {
+      display: grid !important;
+      grid-template-columns: repeat(3, 1fr) !important;
+      gap: 24px !important;
+      margin-bottom: 50px !important;
+    }
+    .kasane-result-card {
+      background: #ffffff !important;
+      padding: 40px 30px !important;
+      border: 1px solid #e1e8ed !important;
+      text-align: center !important;
+      border-radius: 4px !important;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.02) !important;
+    }
+    .kasane-result-achieve { font-size: 24px !important; font-weight: 700 !important; color: #c0392b !important; margin-top: 10px !important;}
+  
+    /* 実績画像ブロック */
+    .kasane-evidence-box {
+      display: grid !important;
+      grid-template-columns: repeat(2, 1fr) !important;
+      gap: 30px !important;
+      margin-top: 50px !important;
+    }
+    .kasane-evidence-wrapper {
+      background: #ffffff !important;
+      padding: 15px !important;
+      border-radius: 8px !important;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.06) !important;
+    }
+    .kasane-evidence-wrapper img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+    }
+  
+    /* アクションエリア（CTA） */
+    .kasane-cta {
+      background: linear-gradient(135deg, #0a192f 0%, #112240 100%) !important;
+      color: #ffffff !important;
+      text-align: center !important;
+      padding: 100px 0 !important;
+    }
+    .kasane-cta-title {
+      font-size: 32px !important;
+      font-weight: bold !important;
+      margin-bottom: 20px !important;
+    }
+    .kasane-cta-text {
+      font-size: 20px !important;
+      color: #cbd5e1 !important;
+      margin-bottom: 40px !important;
+    }
+  
+    /* 事業者情報 */
+    .kasane-footer { background-color: #050c18 !important; color: #999 !important; padding: 80px 0 !important; }
+    .kasane-info-table { width:100%; max-width:750px; margin:0 auto; border-collapse: collapse !important; font-size: 18px !important;}
+    .kasane-info-table th { color: #d4af37 !important; border-bottom: 1px solid #222 !important; padding: 16px !important; text-align: left !important; width: 25%; font-weight: bold;}
+    .kasane-info-table td { color: #fff !important; border-bottom: 1px solid #222 !important; padding: 16px !important; text-align: left !important; }
+  
+    /* レスポンシブ */
+    @media (max-width: 960px) {
+      .kasane-service-grid, .kasane-stats-grid, .kasane-result-grid, .kasane-evidence-box {
+        grid-template-columns: 1fr !important;
+      }
+    }
+    @media (max-width: 768px) {
+      .kasane-lp-v2 { font-size: 17px !important; }
+      .kasane-hero-title { font-size: 34px !important; }
+      .kasane-hero-emphasis { font-size: 46px !important; }
+      .kasane-section-title { font-size: 30px !important; }
+      .kasane-pain-layout { grid-template-columns: 1fr !important; }
+      .kasane-strength-box, .kasane-training { flex-direction: column !important; padding: 30px !important; }
+      .kasane-strength-header { flex-direction: column; gap: 20px; text-align: center; }
+      .kasane-strength-images { grid-template-columns: 1fr !important; }
+      .sim-container { padding: 20px !important; }
+      .sim-item { flex-direction: column !important; align-items: flex-start !important; gap: 8px !important; }
+      .sim-price { margin-left: 0 !important; padding-left: 32px !important; }
+      .sim-item-input-group { margin-left: 0 !important; padding-left: 32px !important; }
+      .kasane-area-list { grid-template-columns: 1fr !important; }
+      .kasane-service-other { flex-direction: column !important; align-items: flex-start !important; }
+      .kasane-info-table th, .kasane-info-table td { padding: 12px !important; font-size: 16px !important; }
+      .kasane-btn { font-size: 20px !important; padding: 18px 30px !important; width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="kasane-lp-v2">
+
+    <!-- ヒーローセクション（スライダー背景） -->
+    <section class="kasane-hero">
+      <div class="kasane-hero-bg kasane-hero-bg1"></div>
+      <div class="kasane-hero-bg kasane-hero-bg2"></div>
+      <div class="kasane-hero-bg kasane-hero-bg3"></div>
+      <div class="kasane-hero-overlay"></div>
+      
+      <div class="kasane-container">
+        <p class="kasane-hero-sub">SNS運用代行・スクール事業化 伴走型コンサルティング</p>
+        <div class="animate-hero-title">
+          <h1 class="kasane-hero-title">
+            <span class="kasane-hero-emphasis">地域密着型</span>
+            意思決定者のためのプレミアムプラン「KASANE」
+          </h1>
+        </div>
+        <p style="font-size: 22px; color: #e1e8ed; margin-bottom: 40px; font-weight: 500; line-height: 1.5;">
+          佐世保のビジネスを知り尽くした私たちが、貴社の想いを戦略的な形へと昇華させます。
+        </p>
+        <a href="https://forms.gle/wtcBGWDrY5M7ytAZ8" target="_blank" rel="noopener" class="kasane-btn">個別相談・お見積もりはこちら</a>
+      </div>
+    </section>
+  
+    <!-- 強みセクション -->
+    <section class="kasane-section kasane-strength">
+      <div class="kasane-container">
+        <div class="kasane-strength-box anim-ready">
+          <div class="kasane-strength-header">
+            <div class="kasane-strength-icon">🏆</div>
+            <div class="kasane-strength-content">
+              <h4 class="kasane-strength-sub-title">地域密層型のオンライン戦略でビジネスを次のステージへ</h4>
+              <h3>KASANEの圧倒的な強み</h3>
+              <p>
+                最大の強みは、<strong>オンラインでの商品設計から、業種に合わせたSNSの選定、さらに具体的な販売促進のアドバイスまで弊社だけで完結できること。</strong><br>
+                複数の会社を介さないため、情報の乖離がなく、大幅なコスト削減とスピード感のある運用を実現します。
+              </p>
+            </div>
+          </div>
+          
+          <div class="kasane-strength-images">
+            <div class="kasane-strength-img-wrapper">
+              <img src="/images/strength1.png" alt="KASANEのオンライン一気通貫フロー図" />
+            </div>
+            <div class="kasane-strength-img-wrapper">
+              <img src="/images/strength2.png" alt="1社完結による大幅なコスト削減効果" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  
+    <!-- お悩みセクション（画像統合） -->
+    <section class="kasane-section kasane-pain">
+      <div class="kasane-container">
+        <h2 class="kasane-section-title">佐世保の事業者様、このようなお悩みはありませんか？</h2>
+        
+        <div class="kasane-pain-layout">
+          <div class="kasane-pain-grid">
+            <div class="kasane-pain-card anim-ready">
+              <span class="kasane-pain-icon">❓</span>
+              <p class="kasane-pain-text">SNSを活用したいが、何から始めればいいかがわからない</p>
+            </div>
+            <div class="kasane-pain-card anim-ready">
+              <span class="kasane-pain-icon">⌛</span>
+              <p class="kasane-pain-text">SNSに割ける時間がない</p>
+            </div>
+            <div class="kasane-pain-card anim-ready">
+              <span class="kasane-pain-icon">👥</span>
+              <p class="kasane-pain-text">社内に詳しい人材がいない</p>
+            </div>
+            <div class="kasane-pain-card anim-ready">
+              <span class="kasane-pain-icon">🚀</span>
+              <p class="kasane-pain-text">SNSを活用して販路拡大や人材採用につなげたい</p>
+            </div>
+          </div>
+          
+          <!-- お悩み指定画像をここに統合 -->
+          <div class="kasane-pain-img-box anim-ready">
+            <img src="https://utagesystem.s3.ap-northeast-1.amazonaws.com/BcZFczv5CgN8/hm205UqqfHL9B9g6yWqmg1ziBUIabV64AtdqxFOc.png" alt="SNS活用のお悩み">
+          </div>
+        </div>
+      </div>
+    </section>
+  
+    <!-- 弊社の想い・方針セクション -->
+    <section class="kasane-section kasane-proposal">
+      <div class="kasane-container">
+        <div class="kasane-proposal-box anim-ready">
+          <div class="kasane-proposal-lead">
+            無駄な経費は一切かけさせません。<br>貴社のビジネスに徹底カスタマイズしたプランをご提案。
+          </div>
+          <div class="kasane-proposal-text">
+            <p>業種や業態、広めたいサービスによって、どのSNSを活用すべきか、どのような販売導線で構築していくべきかは全く異なります。無駄なところに経費をかけることがないよう、必要な項目だけをスマートにカスタマイズし、ご提案させていただきます。</p>
+            <p>求めている結果に対し、何を・どのくらいの頻度で行わなければいけないかによって費用が変動します。本物の価値を求める経営者様へ最適なプランを算出しますので、ぜひ一度お見積もりのご相談をください。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  
+    <!-- サービス内容セクション -->
+    <section class="kasane-section kasane-service">
+      <div class="kasane-container">
+        <h2 class="kasane-section-title">サービス内容</h2>
+        
+        <div class="kasane-service-grid">
+          <!-- Instagram -->
+          <div class="kasane-service-card anim-ready">
+            <h3 class="kasane-service-name">1. Instagram 投稿作成代行</h3>
+            <ul class="kasane-service-list">
+              <li>プロフィール、ハイライト添削</li>
+              <li>ビジネス成果を見据えた企画の提案</li>
+              <li>高品質な画像作成</li>
+              <li>洗練された文字入り画像作成</li>
+              <li>リール台本作成・動画編集</li>
+              <li>ストーリーズ画像作成</li>
+              <li>必要に応じた撮影補助、演者、ナレーターの手配</li>
+            </ul>
+          </div>
+  
+          <!-- YouTube -->
+          <div class="kasane-service-card anim-ready">
+            <h3 class="kasane-service-name">2. YouTube 投稿作成代行</h3>
+            <ul class="kasane-service-list">
+              <li>市場分析に基づく企画立案</li>
+              <li>視聴維持率を高める台本作成</li>
+              <li>プロフェッショナルな動画編集</li>
+              <li>必要に応じた撮影補助、演者、ナレーターの手配</li>
+            </ul>
+          </div>
+  
+          <!-- Threads -->
+          <div class="kasane-service-card anim-ready">
+            <h3 class="kasane-service-name">3. Threads 投稿作成代行</h3>
+            <ul class="kasane-service-list">
+              <li>エンゲージメントを高める文章作成</li>
+              <li>業種に応じた画像作成（必要性が高い場合のみ）</li>
+            </ul>
+          </div>
+        </div>
+  
+        <!-- その他の支援内容 -->
+        <div class="kasane-service-other anim-ready">
+          <div class="kasane-service-other-title">4. その他のオンライン総合支援</div>
+          <div class="kasane-service-other-tags">
+            <div class="kasane-service-tag">Meta広告のアドバイス</div>
+            <div class="kasane-service-tag">LINE公式アカウント構築</div>
+            <div class="kasane-service-tag">ホームページ（HP）作成</div>
+            <div class="kasane-service-tag">ランディングページ（LP）作成</div>
+          </div>
+          <p style="width: 100%; margin-top: 15px; color: #e1e8ed; font-size: 17px;">※オンラインに関する領域であれば、何でも柔軟にご相談を承ります。</p>
+        </div>
+  
+        <!-- アカウント凍結対策・著作権について -->
+        <div class="kasane-security-box anim-ready">
+          <div class="kasane-security-title">
+            🛡️ アカウント凍結リスク対策と著作権の完全管理メリット
+          </div>
+          <div class="kasane-security-text">
+            <p>弊社では、クライアント様の大切な資産を守るため、投稿作成完了後はデータ形式（素材一式）でお渡しし、実際のアップロード作業のみ事業者様に行っていただいております。</p>
+            <p style="margin-top: 10px; font-weight: bold;">【この体制が選ばれる2つの理由】</p>
+            <p>1. 外部アクセスを最小限にし、プラットフォーム側からのアカウント凍結リスクを大幅に下げます。<br>
+            2. 万が一、将来的に契約を解除された後であっても、アカウントに付随するすべての著作権を事業者様側で完全管理・運用し続けることができます。</p>
+          </div>
+        </div>
+  
+        <!-- お見積りシミュレーション -->
+        <div class="sim-container anim-ready">
+          <div class="sim-title">お見積りシミュレーション（月額想定値）</div>
+  
+          <div class="sim-section">
+            <div class="sim-section-title">1. Instagram投稿作成代行（週2投稿基準）</div>
+            <div class="sim-item">
+              <label><input type="checkbox" class="sim-calc" data-price="10000"> アカウント立ち上げ時の設定補助</label>
+              <span class="sim-price">10,000円</span>
+            </div>
+            <div class="sim-item">
+              <label><input type="checkbox" class="sim-calc" data-price="10000"> プロフィール、ハイライト添削</label>
+              <span class="sim-price">10,000円</span>
+            </div>
+            <div class="sim-item">
+              <label><input type="checkbox" class="sim-calc" data-price="20000"> 企画の提案</label>
+              <span class="sim-price">20,000円</span>
+            </div>
+            <div class="sim-item">
+              <label><input type="checkbox" class="sim-calc" data-price="80000"> 画像作成 / 文字入り画像作成</label>
+              <span class="sim-price">80,000円</span>
+            </div>
+            <div class="sim-item">
+              <label><input type="checkbox" class="sim-calc" data-price="40000"> リール台本作成</label>
+              <span class="sim-price">40,000円</span>
+            </div>
+            <div class="sim-item">
+              <label><input type="checkbox" class="sim-calc" data-price="60000"> 動画編集</label>
+              <span class="sim-price">60,000円</span>
+            </div>
+            <div class="sim-item">
+              <label><input type="checkbox" class="sim-calc" data-price="60000"> ストーリーズ画像作成 (月20枚納品)</label>
+              <span class="sim-price">60,000円</span>
+            </div>
+            <div class="sim-item">
+              <label><input type="checkbox" class="sim-calc" data-price="80000"> 撮影補助、演者、ナレーターの手配</label>
+              <span class="sim-price">80,000円</span>
+            </div>
+          </div>
+  
+          <div class="sim-section">
+            <div class="sim-section-title">2. YouTube投稿作成代行（週1投稿基準）</div>
+            <div class="sim-item">
+              <label><input type="checkbox" class="sim-calc" data-price="10000"> チャンネル立ち上げ時の設定補助</label>
+              <span class="sim-price">10,000円</span>
+            </div>
+            <div class="sim-item">
+              <label><input type="checkbox" class="sim-calc" data-price="20000"> 企画立案</label>
+              <span class="sim-price">20,000円</span>
+            </div>
+            <div class="sim-item">
+              <label><input type="checkbox" class="sim-calc" data-price="40000"> 台本作成</label>
+              <span class="sim-price">40,000円</span>
+            </div>
+            <div class="sim-item">
+              <label><input type="checkbox" class="sim-calc" data-price="100000"> 動画編集（10分尺/本想定）</label>
+              <span class="sim-price">100,000円</span>
+            </div>
+            <div class="sim-item">
+              <label><input type="checkbox" class="sim-calc" data-price="80000"> 撮影補助、演者、ナレーターの手配</label>
+              <span class="sim-price">80,000円</span>
+            </div>
+          </div>
+  
+          <div class="sim-section">
+            <div class="sim-section-title">3. Threads投稿作成代行</div>
+            <div class="sim-item">
+              <label><input type="checkbox" class="sim-calc" data-price="50000"> 100投稿分文章作成</label>
+              <span class="sim-price">50,000円</span>
+            </div>
+            <div class="sim-item">
+              <div class="sim-item-input-group">
+                <span>画像作成（1枚につき 2,000円）</span>
+                <input type="number" id="threads-img-count" min="0" value="0"> <span>枚</span>
+              </div>
+              <span class="sim-price" id="threads-img-price">0円</span>
+            </div>
+          </div>
+  
+          <div class="sim-section">
+            <div class="sim-section-title">4. コンサルティング・伴走</div>
+            <div class="sim-item">
+              <label><input type="checkbox" class="sim-calc" data-price="150000"> 月額コンサルティング（社内研修を含む）</label>
+              <span class="sim-price">150,000円</span>
+            </div>
+          </div>
+  
+          <div class="sim-total-box">
+            <div class="sim-total-title">概算合計金額（月額目安）</div>
+            <div class="sim-total-price"><span id="sim-total">0</span>円</div>
+          </div>
+  
+          <div class="sim-note">
+            ※上記金額は運用頻度等に基づいた概算です。要件に合わせてさらに柔軟なカスタム調整が可能です。
+          </div>
+        </div>
+  
+        <!-- 内製化研修セクション -->
+        <div class="kasane-training anim-ready">
+          <div style="font-size: 50px;">🤝</div>
+          <div class="kasane-training-text">
+            <h4>将来的な「内製化」も強力にサポート</h4>
+            <p style="font-size: 19px; line-height: 1.6;">
+              ゆくゆくは自社内で安定して運用を完結させたい事業者様のために、<strong>内製化スクール・従業員の方々に対する実戦的研修プラン</strong>もご用意しております。単なる一時的な代行に留まらず、SNSの基礎から応用ノウハウまで徹底的にレクチャーし、貴社に価値ある有形・無形の資産（スキル・組織力）を確実に残します。
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  
+    <!-- 対面ミーティング可能地域 -->
+    <section class="kasane-section kasane-area">
+      <div class="kasane-container">
+        <h2 class="kasane-section-title">対面ミーティング対応地域</h2>
+        <div class="kasane-area-card anim-ready">
+          <ul class="kasane-area-list">
+            <li class="kasane-area-item highlight-city">📍 1. 佐世保市（地域密着・中心対応）</li>
+            <li class="kasane-area-item">🚗 2. 長崎県内（佐世保市除く、交通費別途）</li>
+            <li class="kasane-area-item">🚗 3. 佐賀県（交通費別途）</li>
+            <li class="kasane-area-item">🚄 4. 福岡県（交通費別途）</li>
+          </ul>
+          <div class="kasane-area-note">
+            <p>※その他の地域に関しましても、全国に有能な弊社チームメンバーが在籍しております。</p>
+            <p style="font-weight: bold; color: #0a192f; margin-top: 5px;">遠方の事業者様も、どうぞお気軽にお問い合わせ・ご相談ください。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  
+    <!-- 実績セクション（画像統合） -->
+    <section class="kasane-section kasane-stats">
+      <div class="kasane-container">
+        <h2 class="kasane-section-title">自社メディア・支援実績</h2>
+        
+        <!-- 自社SNSフォロワー数 -->
+        <div class="kasane-stats-grid">
+          <div class="kasane-stats-card anim-ready" style="border-top: 4px solid #ff0000;">
+            <p style="color:#d4af37; font-weight:bold; font-size:18px;">YouTube</p>
+            <p class="kasane-stats-num">2.5万人</p>
+            <a href="https://www.youtube.com/@kunoichisan" target="_blank" rel="noopener" class="kasane-stats-link">公式チャンネルを見る ↗</a>
+          </div>
+          <div class="kasane-stats-card anim-ready" style="border-top: 4px solid #ffffff;">
+            <p style="color:#d4af37; font-weight:bold; font-size:18px;">Threads</p>
+            <p class="kasane-stats-num">5,000人</p>
+            <a href="https://www.threads.com/@kunoichiot" target="_blank" rel="noopener" class="kasane-stats-link">公式アカウントを見る ↗</a>
+          </div>
+          <div class="kasane-stats-card anim-ready" style="border-top: 4px solid #e1306c;">
+            <p style="color:#d4af37; font-weight:bold; font-size:18px;">Instagram</p>
+            <p class="kasane-stats-num">1,900人</p>
+            <a href="https://www.instagram.com/kunoichiot/" target="_blank" rel="noopener" class="kasane-stats-link">公式アカウントを見る ↗</a>
+          </div>
+        </div>
+  
+        <!-- クライアント実績 -->
+        <div class="kasane-result-grid">
+          <div class="kasane-result-card anim-ready">
+            <p style="font-weight:bold; color:#0a192f; font-size: 20px;">不動産業</p>
+            <p style="font-size:16px; color:#666; margin: 5px 0;">Threads開始10ヶ月</p>
+            <p class="kasane-result-achieve">400万円の増収</p>
+          </div>
+          <div class="kasane-result-card anim-ready">
+            <p style="font-weight:bold; color:#0a192f; font-size: 20px;">整体院</p>
+            <p style="font-size:16px; color:#666; margin: 5px 0;">Instagram開始3ヶ月</p>
+            <p class="kasane-result-achieve">33万円の商品成約</p>
+          </div>
+          <div class="kasane-result-card anim-ready">
+            <p style="font-weight:bold; color:#0a192f; font-size: 20px;">買取専門店</p>
+            <p style="font-size:16px; color:#666; margin: 5px 0;">YouTube開始3ヶ月</p>
+            <p class="kasane-result-achieve">77万円の増収</p>
+          </div>
+        </div>
+  
+        <!-- 実績裏付け指定画像を2枚統合 -->
+        <div class="kasane-evidence-box">
+          <div class="kasane-evidence-wrapper anim-ready">
+            <img src="https://utagesystem.s3.ap-northeast-1.amazonaws.com/BcZFczv5CgN8/0IbCm7F5RTH9NtZItjqQTWdaMZQqXas9rkqvC4Dq.png" alt="実績の強みエビデンス画像1">
+          </div>
+          <div class="kasane-evidence-wrapper anim-ready">
+            <img src="https://utagesystem.s3.ap-northeast-1.amazonaws.com/BcZFczv5CgN8/LHfso6EN4vcdt9YYJMJjJ9xJdr9cmjV9O76xD9TM.png" alt="実績の強みエビデンス画像2">
+          </div>
+        </div>
+  
+      </div>
+    </section>
+  
+    <!-- お問い合わせCTA -->
+    <section class="kasane-cta">
+      <div class="kasane-container">
+        <h2 class="kasane-cta-title">貴社ビジネスに最適化したカスタムプランをご提案します</h2>
+        <p class="kasane-cta-text">現在の課題分析から具体的な解決スキームまで、まずはお気軽にご相談ください。</p>
+        <a href="https://forms.gle/wtcBGWDrY5M7ytAZ8" target="_blank" rel="noopener" class="kasane-btn">個別相談・無料お見積もりフォームへ</a>
+      </div>
+    </section>
+  
+    <!-- フッター / 事業者情報 -->
+    <footer class="kasane-footer">
+      <div class="kasane-container">
+        <h3 style="color:#fff; font-size:30px; margin-bottom:40px; text-align:center; font-family:serif;">事業者情報</h3>
+        <table class="kasane-info-table">
+          <tr><th>名称</th><td>KASANE (SNS運用代行・コンサルティング)</td></tr>
+          <tr><th>代表</th><td>藤澤明日香</td></tr>
+          <tr><th>所在地</th><td>長崎県佐世保市 (正式契約時に詳細開示)</td></tr>
+          <tr><th>設立</th><td>Since 2025</td></tr>
+        </table>
+        <p style="text-align:center; margin-top:60px; font-size:15px; color: #666;">&copy; 2025 KASANE. All Rights Reserved.</p>
+      </div>
+    </footer>
+  
+  </div>
+  
+  <script>
+    // スクロールフェードイン制御
+    const observerOptions = { threshold: 0.1 };
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('anim-active');
+        }
+      });
+    }, observerOptions);
+  
+    document.querySelectorAll('.anim-ready').forEach(el => observer.observe(el));
+  
+    // お見積りインタラクティブ計算システム
+    document.addEventListener('DOMContentLoaded', function() {
+      const checkboxes = document.querySelectorAll('.sim-calc');
+      const imgCountInput = document.getElementById('threads-img-count');
+      const imgPriceLabel = document.getElementById('threads-img-price');
+      const totalLabel = document.getElementById('sim-total');
+      
+      const THREADS_IMG_UNIT_PRICE = 2000;
+  
+      function calculateTotal() {
+        let total = 0;
+  
+        // チェックボックスの集計
+        checkboxes.forEach(cb => {
+          if (cb.checked) {
+            total += parseInt(cb.getAttribute('data-price'), 10);
+          }
+        });
+  
+        // Threads画像枚数の計算
+        const count = parseInt(imgCountInput.value, 10) || 0;
+        const threadsImgTotal = count * THREADS_IMG_UNIT_PRICE;
+        
+        imgPriceLabel.textContent = threadsImgTotal.toLocaleString() + '円';
+        
+        total += threadsImgTotal;
+        totalLabel.textContent = total.toLocaleString();
+      }
+  
+      checkboxes.forEach(cb => {
+        cb.addEventListener('change', calculateTotal);
+      });
+      imgCountInput.addEventListener('input', calculateTotal);
+      imgCountInput.addEventListener('change', calculateTotal);
+    });
+  </script>
+</body>
+</html>
